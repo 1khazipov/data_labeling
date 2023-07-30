@@ -27,7 +27,6 @@ const App: FC = () => {
     const newLabelCardsList = labelCardsList.filter((labelCard) => labelCard.id !== id);
     setLabelCardsList(newLabelCardsList);
 
-    // Also remove the corresponding coordinates from allRectangleCoordinates
     const newAllRectangleCoordinates = [...allRectangleCoordinates];
     newAllRectangleCoordinates.splice(index, 1);
     setAllRectangleCoordinates(newAllRectangleCoordinates);
