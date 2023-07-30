@@ -8,7 +8,6 @@ interface SingleLabelCardProps {
 }
 
 const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard }) => {
-    // const [edit, setEdit] = useState<boolean>(false);
     const handleDelete = () => {
         deleteLabelCard(labelCard.id);
     }

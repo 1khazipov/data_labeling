@@ -1,7 +1,9 @@
-type LabelCard = {
-    id: number,
-    title: string,
-    /* coords */
-};
+// models/LabelCard.tsx
 
-export default LabelCard;
+interface LabelCard {
+    id: number;
+    title: string;
+  }
+  
+  export default LabelCard;
+  
