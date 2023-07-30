@@ -18,6 +18,11 @@ const App: FC = () => {
     setImageUrl(image);
   };
 
+  const deleteLabelCard = (id: number) => {
+    const newLabelCardsList = labelCardsList.filter((labelCard) => labelCard.id !== id);
+    setLabelCardsList(newLabelCardsList);
+  }
+
   return (
     <div className="App">
       <div className="columns-container">
@@ -27,7 +32,10 @@ const App: FC = () => {
           {imageUrl && <AddLabelForm addLabelCard={addLabelCard} />}
         </div>
         <div className="right-column">
-          <DisplayLabelCards labelCardsList={labelCardsList} />
+          <DisplayLabelCards 
+            labelCardsList={labelCardsList}
+            deleteLabelCard={deleteLabelCard}
+          />
         </div>
       </div>
     </div>

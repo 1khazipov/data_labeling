@@ -1,4 +1,4 @@
-import React, { FC, useState, ChangeEvent, FormEvent } from "react";
+import React, { FC, useState, ChangeEvent, FormEvent, useRef } from "react";
 import LabelCard from "../models/LabelCard";
 import './styles.css';
 
@@ -15,6 +15,8 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard }) => {
     const [newLabelCard, setNewLabelCard] = 
         useState<{title:string /* coords */}>(initState);
     
+    const formRef = useRef<HTMLFormElement>(null);
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setNewLabelCard({
@@ -38,8 +40,15 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard }) => {
         setNewLabelCard(initState);
     }
 
+    const handleReset = () => {
+        setNewLabelCard(initState);
+        if (formRef.current) {
+            formRef.current.reset();
+        }
+    }
+
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} ref={formRef}>
             <input
                 name="title"
                 type="text"
@@ -50,7 +59,7 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard }) => {
             <button type="submit">
                 Добавить
             </button>
-            <button type="reset">
+            <button type="button" onClick={handleReset}>
                 Отменить
             </button>
         </form>
