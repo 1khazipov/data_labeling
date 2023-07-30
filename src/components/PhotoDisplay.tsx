@@ -10,7 +10,6 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
   const [startY, setStartY] = useState<number | null>(null);
   const [endX, setEndX] = useState<number | null>(null);
   const [endY, setEndY] = useState<number | null>(null);
-  const [isRectangleFixed, setIsRectangleFixed] = useState<boolean>(false);
   const imageRef = useRef<HTMLImageElement>(null);
 
   const handleMouseDown = (event: MouseEvent<HTMLDivElement>) => {
@@ -30,9 +29,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
 
   const handleMouseUp = () => {
     if (startX !== null && startY !== null && endX !== null && endY !== null) {
-      // Rectangle coordinates are ready
       onRectangleSelect(startX, startY, endX, endY);
-      setIsRectangleFixed(true);
     }
   };
 

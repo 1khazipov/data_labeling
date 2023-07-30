@@ -5,16 +5,17 @@ import { AiFillDelete } from "react-icons/ai";
 interface SingleLabelCardProps {
     labelCard: LabelCard
     deleteLabelCard: (id: number) => void;
+    rectangleCoordinates: any;
 }
 
-const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard }) => {
+const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard, rectangleCoordinates }) => {
     const handleDelete = () => {
         deleteLabelCard(labelCard.id);
     }
 
     return (
         <div className="labelCard">
-            <h2>{labelCard.title}: (x1, y1) - (x2, y2)</h2>
+            <h2>{labelCard.title}: ({rectangleCoordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]}) </h2>
 
             <div className="labelCard-controls"> 
                 <AiFillDelete onClick={handleDelete}/>

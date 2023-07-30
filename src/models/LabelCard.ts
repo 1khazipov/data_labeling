@@ -1,6 +1,4 @@
-// models/LabelCard.tsx
-
-interface LabelCard {
+type LabelCard = {
     id: number;
     title: string;
   }

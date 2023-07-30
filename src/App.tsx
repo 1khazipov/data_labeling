@@ -35,13 +35,14 @@ const App: FC = () => {
         <div className="left-column">
           <PhotoUpload onImageUpload={handleImageUpload} />
           {imageUrl && <PhotoDisplay imageUrl={imageUrl} onRectangleSelect={handleRectangleSelect} />}
-          {imageUrl && rectangleCoordinates[0] != rectangleCoordinates[2] && rectangleCoordinates[1] != rectangleCoordinates[3] 
+          {imageUrl && rectangleCoordinates[0] !== rectangleCoordinates[2] && rectangleCoordinates[1] !== rectangleCoordinates[3] 
           && <AddLabelForm addLabelCard={addLabelCard} />}
         </div>
         <div className="right-column">
           <DisplayLabelCards 
             labelCardsList={labelCardsList}
             deleteLabelCard={deleteLabelCard}
+            rectangleCoordinates={rectangleCoordinates}
           />
         </div>
       </div>

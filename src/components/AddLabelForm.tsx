@@ -8,12 +8,11 @@ interface AddLabelFormProps {
 
 const initState = {
     title: '',
-    /* coords */
 }
 
 const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard }) => {
     const [newLabelCard, setNewLabelCard] = 
-        useState<{title:string /* coords */}>(initState);
+        useState<{title:string}>(initState);
     
     const formRef = useRef<HTMLFormElement>(null);
 
@@ -28,12 +27,11 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard }) => {
     const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         
-        const { title /* coords */ } = newLabelCard;
+        const { title } = newLabelCard;
 
-        if (title /* && coords */) {
+        if (title) {
             addLabelCard({
                 title,
-                /* coords */
                 id: Date.now()
             });
         }
