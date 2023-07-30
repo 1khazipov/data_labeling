@@ -9,24 +9,32 @@ import DisplayLabelCards from './components/DisplayLabelCards';
 const App: FC = () => {
   const [imageUrl, setImageUrl] = useState<string>('');
   const [labelCardsList, setLabelCardsList] = useState<LabelCard[]>([]);
-  const [rectangleCoordinates, setRectangleCoordinates] = useState<number[]>([]);
+  const [allRectangleCoordinates, setAllRectangleCoordinates] = useState<number[][]>([]);
+  const [currentRectangleCoordinates, setCurrentRectangleCoordinates] = useState<number[]>([]);
 
-  const addLabelCard = (newLabelCard: LabelCard) => {
+  const addLabelCard = (newLabelCard: LabelCard, rectangleCoordinates: number[]) => {
     setLabelCardsList([...labelCardsList, newLabelCard]);
+    setAllRectangleCoordinates([...allRectangleCoordinates, rectangleCoordinates]);
   };
 
   const handleImageUpload = (image: string) => {
     setImageUrl(image);
-    setRectangleCoordinates([]);
+    setAllRectangleCoordinates([]);
+    setCurrentRectangleCoordinates([]);
   };
 
-  const deleteLabelCard = (id: number) => {
+  const deleteLabelCard = (id: number, index: number) => {
     const newLabelCardsList = labelCardsList.filter((labelCard) => labelCard.id !== id);
     setLabelCardsList(newLabelCardsList);
-  }
+
+    // Also remove the corresponding coordinates from allRectangleCoordinates
+    const newAllRectangleCoordinates = [...allRectangleCoordinates];
+    newAllRectangleCoordinates.splice(index, 1);
+    setAllRectangleCoordinates(newAllRectangleCoordinates);
+  };
 
   const handleRectangleSelect = (startX: number, startY: number, endX: number, endY: number) => {
-    setRectangleCoordinates([startX, startY, endX, endY]);
+    setCurrentRectangleCoordinates([startX, startY, endX, endY]);
   };
 
   return (
@@ -34,15 +42,21 @@ const App: FC = () => {
       <div className="columns-container">
         <div className="left-column">
           <PhotoUpload onImageUpload={handleImageUpload} />
-          {imageUrl && <PhotoDisplay imageUrl={imageUrl} onRectangleSelect={handleRectangleSelect} />}
-          {imageUrl && rectangleCoordinates[0] !== rectangleCoordinates[2] && rectangleCoordinates[1] !== rectangleCoordinates[3] 
-          && <AddLabelForm addLabelCard={addLabelCard} />}
+          {imageUrl && (
+            <PhotoDisplay imageUrl={imageUrl} onRectangleSelect={handleRectangleSelect} />
+          )}
+          {imageUrl && currentRectangleCoordinates.length > 0 && (
+            <AddLabelForm
+              addLabelCard={addLabelCard}
+              currentRectangleCoordinates={currentRectangleCoordinates}
+            />
+          )}
         </div>
         <div className="right-column">
-          <DisplayLabelCards 
+          <DisplayLabelCards
             labelCardsList={labelCardsList}
             deleteLabelCard={deleteLabelCard}
-            rectangleCoordinates={rectangleCoordinates}
+            allRectangleCoordinates={allRectangleCoordinates}
           />
         </div>
       </div>
