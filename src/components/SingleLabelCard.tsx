@@ -17,7 +17,10 @@ const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard,
   return (
     <div className="labelCard">
       <h2>
-        {labelCard.title}: ({rectangleCoordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})
+        {labelCard.title}
+      </h2>
+      <h2>
+        ({rectangleCoordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})
       </h2>
 
       <div className="labelCard-controls">

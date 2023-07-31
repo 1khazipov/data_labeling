@@ -47,7 +47,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
   };
 
   return (
-    <div style={{ position: "relative", maxWidth: "500px", marginTop: "20px" }}>
+    <div style={{ position: "relative", maxWidth: "1000px", marginTop: "40px" }}>
       <div
         style={{ position: "absolute", border: "2px solid red", pointerEvents: "none", left: startX ?? 0, top: startY ?? 0, width: endX ? endX - startX! : 0, height: endY ? endY - startY! : 0 }}
       ></div>
@@ -59,6 +59,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
+        draggable="false"
       />
     </div>
   );
