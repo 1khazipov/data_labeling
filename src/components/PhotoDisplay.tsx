@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, MouseEvent } from "react";
+import React, { FC, useRef, useState, MouseEvent, useEffect } from "react";
 
 interface PhotoDisplayProps {
   imageUrl: string;
@@ -27,11 +27,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
     setEndY(y);
   };
 
-  const handleMouseUp = () => {
-    if (startX !== null && startY !== null && endX !== null && endY !== null) {
-      onRectangleSelect(startX, startY, endX, endY);
-    }
-  };
+  const handleMouseUp = () => {};
 
   const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
     if (event.buttons !== 1 || !imageRef.current) {
@@ -46,10 +42,24 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect }) =>
     setEndY(y);
   };
 
+  useEffect(() => {
+    if (startX !== null && startY !== null && endX !== null && endY !== null) {
+      onRectangleSelect(startX, startY, endX, endY);
+    }
+  }, [startX, startY, endX, endY, onRectangleSelect]);
+
   return (
     <div style={{ position: "relative", maxWidth: "1000px", marginTop: "40px" }}>
       <div
-        style={{ position: "absolute", border: "2px solid red", pointerEvents: "none", left: startX ?? 0, top: startY ?? 0, width: endX ? endX - startX! : 0, height: endY ? endY - startY! : 0 }}
+        style={{
+          position: "absolute",
+          border: "2px solid red",
+          pointerEvents: "none",
+          left: startX ?? 0,
+          top: startY ?? 0,
+          width: endX ? endX - startX! : 0,
+          height: endY ? endY - startY! : 0,
+        }}
       ></div>
       <img
         ref={imageRef}
