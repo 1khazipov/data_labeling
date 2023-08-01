@@ -26,7 +26,7 @@ const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard,
   const handleCoordinatesChange = () => {
     if (coordinatesRef.current) {
       const newCoordinates = coordinatesRef.current.innerText
-        .replace(/\(|\)/g, '') // Remove parentheses
+        .replace(/\(|\)/g, '')
         .split(',')
         .map((coord) => parseInt(coord.trim(), 10));
       console.log("New Coordinates:", newCoordinates);

@@ -1,19 +1,19 @@
-import React, { FC, useState } from 'react';
-import PhotoUpload from './components/PhotoUpload';
-import PhotoDisplay from './components/PhotoDisplay';
-import LabelCard from './models/LabelCard';
-import AddLabelForm from './components/AddLabelForm';
-import DisplayLabelCards from './components/DisplayLabelCards';
-import './App.css';
+import React, { FC, useState } from "react";
+import PhotoUpload from "./components/PhotoUpload";
+import PhotoDisplay from "./components/PhotoDisplay";
+import LabelCard from "./models/LabelCard";
+import AddLabelForm from "./components/AddLabelForm";
+import DisplayLabelCards from "./components/DisplayLabelCards";
+import "./App.css";
 
 const App: FC = () => {
-  const [imageUrl, setImageUrl] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>("");
   const [labelCardsList, setLabelCardsList] = useState<LabelCard[]>([]);
   const [allRectangleCoordinates, setAllRectangleCoordinates] = useState<number[][]>([]);
   const [currentRectangleCoordinates, setCurrentRectangleCoordinates] = useState<number[]>([]);
 
   const addLabelCard = (newLabelCard: LabelCard, rectangleCoordinates: number[]) => {
-    newLabelCard.coordinates = rectangleCoordinates; // Set the coordinates for the newLabelCard
+    newLabelCard.coordinates = rectangleCoordinates;
     setLabelCardsList([...labelCardsList, newLabelCard]);
     setAllRectangleCoordinates([...allRectangleCoordinates, rectangleCoordinates]);
   };
@@ -43,7 +43,11 @@ const App: FC = () => {
         <div className="left-column">
           <PhotoUpload onImageUpload={handleImageUpload} />
           {imageUrl && (
-            <PhotoDisplay imageUrl={imageUrl} onRectangleSelect={handleRectangleSelect} />
+            <PhotoDisplay
+              imageUrl={imageUrl}
+              onRectangleSelect={handleRectangleSelect}
+              allRectangleCoordinates={allRectangleCoordinates}
+            />
           )}
           {imageUrl && currentRectangleCoordinates.length > 0 && (
             <AddLabelForm
