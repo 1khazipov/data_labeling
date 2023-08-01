@@ -25,7 +25,11 @@ const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard,
 
   const handleCoordinatesChange = () => {
     if (coordinatesRef.current) {
-      console.log("New Coordinates:", coordinatesRef.current.innerText);
+      const newCoordinates = coordinatesRef.current.innerText
+        .replace(/\(|\)/g, '') // Remove parentheses
+        .split(',')
+        .map((coord) => parseInt(coord.trim(), 10));
+      console.log("New Coordinates:", newCoordinates);
     }
   };
 
@@ -35,7 +39,7 @@ const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard,
         {labelCard.title}
       </h2>
       <h2 contentEditable onBlur={handleCoordinatesChange} ref={coordinatesRef}>
-        ({rectangleCoordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})
+        ({labelCard.coordinates[0]}, {labelCard.coordinates[1]}) - ({labelCard.coordinates[2]}, {labelCard.coordinates[3]})
       </h2>
 
       <div className="labelCard-controls">

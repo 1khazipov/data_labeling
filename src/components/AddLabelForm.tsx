@@ -34,6 +34,7 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard, currentRectangleCoo
         {
           title,
           id: Date.now(),
+          coordinates: currentRectangleCoordinates,
         },
         currentRectangleCoordinates
       );

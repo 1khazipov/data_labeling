@@ -13,6 +13,7 @@ const App: FC = () => {
   const [currentRectangleCoordinates, setCurrentRectangleCoordinates] = useState<number[]>([]);
 
   const addLabelCard = (newLabelCard: LabelCard, rectangleCoordinates: number[]) => {
+    newLabelCard.coordinates = rectangleCoordinates; // Set the coordinates for the newLabelCard
     setLabelCardsList([...labelCardsList, newLabelCard]);
     setAllRectangleCoordinates([...allRectangleCoordinates, rectangleCoordinates]);
   };
