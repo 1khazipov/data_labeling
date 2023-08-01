@@ -3,8 +3,8 @@ import PhotoUpload from './components/PhotoUpload';
 import PhotoDisplay from './components/PhotoDisplay';
 import LabelCard from './models/LabelCard';
 import AddLabelForm from './components/AddLabelForm';
-import './App.css';
 import DisplayLabelCards from './components/DisplayLabelCards';
+import './App.css';
 
 const App: FC = () => {
   const [imageUrl, setImageUrl] = useState<string>('');

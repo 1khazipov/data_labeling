@@ -51,7 +51,7 @@
   }
 
   form button {
-    width: 50%;
+    width: 100%;
     border: 1px solid #000;
     font-size: 16px;
   }
@@ -67,7 +67,7 @@
     cursor: pointer;
   }
 
-  button,
+  /* button,
   input[type=reset] {
     text-transform: uppercase;
     padding: 8px 15px;
@@ -76,7 +76,7 @@
     color: #fff;
     font-size: 16px;
     cursor: pointer;
-  }
+  } */
 
   .labelCard {
     background: white;

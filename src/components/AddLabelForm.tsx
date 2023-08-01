@@ -41,12 +41,12 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard, currentRectangleCoo
     setNewLabelCard(initState);
   }
 
-  const handleReset = () => {
-    setNewLabelCard(initState);
-    if (formRef.current) {
-      formRef.current.reset();
-    }
-  }
+  // const handleReset = () => {
+  //   setNewLabelCard(initState);
+  //   if (formRef.current) {
+  //     formRef.current.reset();
+  //   }
+  // }
 
   return (
     <form onSubmit={handleSubmit} ref={formRef}>
@@ -60,9 +60,9 @@ const AddLabelForm: FC<AddLabelFormProps> = ({ addLabelCard, currentRectangleCoo
       <button type="submit">
         Добавить
       </button>
-      <button type="button" onClick={handleReset}>
+      {/* <button type="button" onClick={handleReset}>
         Отменить
-      </button>
+      </button> */}
     </form>
   );
 }
