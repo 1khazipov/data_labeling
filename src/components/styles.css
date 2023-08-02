@@ -60,7 +60,6 @@
   input[type=submit] {
     text-transform: uppercase;
     padding: 8px 15px;
-    border: 0;
     background: #f00;
     color: #fff;
     font-size: 16px;
@@ -105,8 +104,65 @@
     color: black;
   }
 
-  .labelCard .labelCard-controls {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  .labelCard button {
+    width: 50%;
+    padding: 8px 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
   }
+  
+  .labelCard button:last-child {
+    margin-right: 0;
+  }
+  
+  .labelCard button:hover {
+    background-color: #0056b3;
+  }
+
+  .edit-label-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }
+  
+  .edit-label-form label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .edit-label-form input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .edit-label-form input:focus {
+    outline: none;
+    border-color: #007bff;
+  }
+  
+  .edit-label-form button {
+    width: 50%;
+    padding: 8px 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .edit-label-form button:hover {
+    background-color: #0056b3;
+  }
+  

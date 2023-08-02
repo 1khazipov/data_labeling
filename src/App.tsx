@@ -4,6 +4,7 @@ import PhotoDisplay from "./components/PhotoDisplay";
 import LabelCard from "./models/LabelCard";
 import AddLabelForm from "./components/AddLabelForm";
 import DisplayLabelCards from "./components/DisplayLabelCards";
+import EditLabelForm from "./components/EditLabelForm";
 import "./App.css";
 
 const App: FC = () => {
@@ -11,6 +12,7 @@ const App: FC = () => {
   const [labelCardsList, setLabelCardsList] = useState<LabelCard[]>([]);
   const [allRectangleCoordinates, setAllRectangleCoordinates] = useState<number[][]>([]);
   const [currentRectangleCoordinates, setCurrentRectangleCoordinates] = useState<number[]>([]);
+  const [editIndex, setEditIndex] = useState<number | any>(null);
 
   const addLabelCard = (newLabelCard: LabelCard, rectangleCoordinates: number[]) => {
     newLabelCard.coordinates = rectangleCoordinates;
@@ -22,6 +24,7 @@ const App: FC = () => {
     setImageUrl(image);
     setAllRectangleCoordinates([]);
     setCurrentRectangleCoordinates([]);
+    setEditIndex(null);
   };
 
   const deleteLabelCard = (id: number, index: number) => {
@@ -35,6 +38,29 @@ const App: FC = () => {
 
   const handleRectangleSelect = (startX: number, startY: number, endX: number, endY: number) => {
     setCurrentRectangleCoordinates([startX, startY, endX, endY]);
+    setEditIndex(null);
+  };
+
+  const handleRectangleEdit = (index: number) => {
+    const rectangle = allRectangleCoordinates[index];
+    setCurrentRectangleCoordinates(rectangle);
+    setEditIndex(index);
+  };
+
+  const handleSaveLabel = (editedLabelCard: LabelCard, editedCoordinates: number[]) => {
+    const updatedLabelCardsList = [...labelCardsList];
+    updatedLabelCardsList[editIndex] = editedLabelCard;
+
+    const updatedAllRectangleCoordinates = [...allRectangleCoordinates];
+    updatedAllRectangleCoordinates[editIndex] = editedCoordinates;
+
+    setLabelCardsList(updatedLabelCardsList);
+    setAllRectangleCoordinates(updatedAllRectangleCoordinates);
+    setEditIndex(null);
+  };
+
+  const handleCancelEdit = () => {
+    setEditIndex(null);
   };
 
   return (
@@ -61,6 +87,10 @@ const App: FC = () => {
             labelCardsList={labelCardsList}
             deleteLabelCard={deleteLabelCard}
             allRectangleCoordinates={allRectangleCoordinates}
+            onRectangleEdit={handleRectangleEdit}
+            editIndex={editIndex}
+            onSaveLabel={handleSaveLabel}
+            onCancelEdit={handleCancelEdit}
           />
         </div>
       </div>

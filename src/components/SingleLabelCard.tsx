@@ -1,50 +1,60 @@
-import React, { FC, useRef } from "react";
+import React, { FC } from "react";
 import LabelCard from "../models/LabelCard";
-import { AiFillDelete } from "react-icons/ai";
+import EditLabelForm from "./EditLabelForm";
 
 interface SingleLabelCardProps {
   labelCard: LabelCard;
-  deleteLabelCard: (id: number, index: number) => void;
-  rectangleCoordinates: any;
+  rectangleCoordinates: number[];
   index: number;
+  deleteLabelCard: (id: number, index: number) => void;
+  isEditing: boolean;
+  onRectangleEdit: (index: number) => void;
+  onSaveLabel: (editedLabelCard: LabelCard, editedCoordinates: number[]) => void;
+  onCancelEdit: () => void;
 }
 
-const SingleLabelCard: FC<SingleLabelCardProps> = ({ labelCard, deleteLabelCard, rectangleCoordinates, index }) => {
+const SingleLabelCard: FC<SingleLabelCardProps> = ({
+  labelCard,
+  rectangleCoordinates,
+  index,
+  deleteLabelCard,
+  isEditing,
+  onRectangleEdit,
+  onSaveLabel,
+  onCancelEdit,
+}) => {
   const handleDelete = () => {
     deleteLabelCard(labelCard.id, index);
   };
 
-  const titleRef = useRef<HTMLHeadingElement>(null);
-  const coordinatesRef = useRef<HTMLHeadingElement>(null);
-
-  const handleTitleChange = () => {
-    if (titleRef.current) {
-      console.log("New Title:", titleRef.current.innerText);
-    }
+  const handleEdit = () => {
+    onRectangleEdit(index);
   };
 
-  const handleCoordinatesChange = () => {
-    if (coordinatesRef.current) {
-      const newCoordinates = coordinatesRef.current.innerText
-        .replace(/\(|\)/g, '')
-        .split(',')
-        .map((coord) => parseInt(coord.trim(), 10));
-      console.log("New Coordinates:", newCoordinates);
-    }
+  const handleSave = (editedLabelCard: LabelCard, editedCoordinates: number[]) => {
+    onSaveLabel(editedLabelCard, editedCoordinates);
+  };
+
+  const handleCancel = () => {
+    onCancelEdit();
   };
 
   return (
     <div className="labelCard">
-      <h2 contentEditable onBlur={handleTitleChange} ref={titleRef}>
-        {labelCard.title}
-      </h2>
-      <h2 contentEditable onBlur={handleCoordinatesChange} ref={coordinatesRef}>
-        ({labelCard.coordinates[0]}, {labelCard.coordinates[1]}) - ({labelCard.coordinates[2]}, {labelCard.coordinates[3]})
-      </h2>
-
-      <div className="labelCard-controls">
-        <AiFillDelete onClick={handleDelete} />
+      <h2>{labelCard.title}</h2>
+      <span>({labelCard.coordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})</span>
+      <div className="button-container">
+        <button onClick={handleDelete}>Удалить</button>
+        <button onClick={handleEdit}>Изменить</button>
       </div>
+      {isEditing && (
+        <EditLabelForm
+          labelCard={labelCard}
+          rectangleCoordinates={rectangleCoordinates}
+          onSave={handleSave}
+          onCancel={handleCancel}
+        />
+      )}
     </div>
   );
 };
