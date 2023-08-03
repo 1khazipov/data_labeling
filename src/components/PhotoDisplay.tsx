@@ -1,4 +1,5 @@
 import React, { FC, useRef, useState, MouseEvent, useEffect } from "react";
+import Rectangle from "./Rectangle";
 
 interface PhotoDisplayProps {
   imageUrl: string;
@@ -69,18 +70,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
         draggable="false"
       />
       {allRectangleCoordinates.map((rectangle, index) => (
-        <div
-          key={index}
-          style={{
-            position: "absolute",
-            border: "2px solid blue",
-            pointerEvents: "none",
-            left: rectangle[0],
-            top: rectangle[1],
-            width: rectangle[2] - rectangle[0],
-            height: rectangle[3] - rectangle[1],
-          }}
-        />
+        <Rectangle key={index} coordinates={rectangle} />
       ))}
       <div
         style={{

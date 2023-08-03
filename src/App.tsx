@@ -63,6 +63,10 @@ const App: FC = () => {
     setEditIndex(null);
   };
 
+  const handleAllRectangleCoordinatesUpdate = (updatedCoordinates: number[][]) => {
+    setAllRectangleCoordinates(updatedCoordinates);
+  };
+
   return (
     <div className="App">
       <div className="columns-container">
