@@ -33,7 +33,12 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
 
   const handleMouseUp = () => {
     if (startX !== null && startY !== null && endX !== null && endY !== null && isDrawing) {
-      onRectangleSelect(startX, startY, endX, endY);
+      onRectangleSelect(
+        Math.min(startX, endX),
+        Math.min(startY, endY),
+        Math.max(startX, endX),
+        Math.max(startY, endY)
+      );
       setIsDrawing(false);
     }
   };
@@ -53,7 +58,12 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
 
   useEffect(() => {
     if (startX !== null && startY !== null && endX !== null && endY !== null && isDrawing) {
-      onRectangleSelect(startX, startY, endX, endY);
+      onRectangleSelect(
+        Math.min(startX, endX),
+        Math.min(startY, endY),
+        Math.max(startX, endX),
+        Math.max(startY, endY)
+      );
     }
   }, [startX, startY, endX, endY, isDrawing, onRectangleSelect]);
 
@@ -72,17 +82,19 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
       {allRectangleCoordinates.map((rectangle, index) => (
         <Rectangle key={index} coordinates={rectangle} />
       ))}
-      <div
-        style={{
-          position: "absolute",
-          border: "2px solid red",
-          pointerEvents: "none",
-          left: startX ?? 0,
-          top: startY ?? 0,
-          width: endX ? endX - startX! : 0,
-          height: endY ? endY - startY! : 0,
-        }}
-      ></div>
+      {startX !== null && startY !== null && endX !== null && endY !== null && (
+        <div
+          style={{
+            position: "absolute",
+            border: "2px solid red",
+            pointerEvents: "none",
+            left: Math.min(startX, endX),
+            top: Math.min(startY, endY),
+            width: Math.abs(endX - startX),
+            height: Math.abs(endY - startY),
+          }}
+        ></div>
+      )}
     </div>
   );
 };

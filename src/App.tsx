@@ -4,7 +4,6 @@ import PhotoDisplay from "./components/PhotoDisplay";
 import LabelCard from "./models/LabelCard";
 import AddLabelForm from "./components/AddLabelForm";
 import DisplayLabelCards from "./components/DisplayLabelCards";
-import EditLabelForm from "./components/EditLabelForm";
 import "./App.css";
 
 const App: FC = () => {
