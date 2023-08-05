@@ -5,9 +5,11 @@ interface PhotoDisplayProps {
   imageUrl: string;
   onRectangleSelect: (startX: number, startY: number, endX: number, endY: number) => void;
   allRectangleCoordinates: number[][];
+  onRectangleClick: (index: number) => void;
+  setAllRectangleCoordinates: React.Dispatch<React.SetStateAction<number[][]>>;
 }
 
-const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allRectangleCoordinates }) => {
+const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allRectangleCoordinates, onRectangleClick, setAllRectangleCoordinates }) => {
   const [startX, setStartX] = useState<number | null>(null);
   const [startY, setStartY] = useState<number | null>(null);
   const [endX, setEndX] = useState<number | null>(null);
@@ -56,6 +58,16 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
     setEndY(y);
   };
 
+  const handleRectangleUpdate = (updatedCoordinates: number[], index: number) => {
+    const updatedAllRectangleCoordinates = [...allRectangleCoordinates];
+    updatedAllRectangleCoordinates[index] = updatedCoordinates;
+    setAllRectangleCoordinates(updatedAllRectangleCoordinates);
+  };
+
+  const handleRectangleClick = (index: number) => {
+    onRectangleClick(index);
+  };
+
   useEffect(() => {
     if (startX !== null && startY !== null && endX !== null && endY !== null && isDrawing) {
       onRectangleSelect(
@@ -80,7 +92,12 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
         draggable="false"
       />
       {allRectangleCoordinates.map((rectangle, index) => (
-        <Rectangle key={index} coordinates={rectangle} />
+        <Rectangle
+          key={index}
+          coordinates={rectangle}
+          onCoordinatesChange={(updatedCoordinates) => handleRectangleUpdate(updatedCoordinates, index)}
+          onRectangleClick={() => onRectangleClick(index)} // Pass onRectangleClick to Rectangle
+        />
       ))}
       {startX !== null && startY !== null && endX !== null && endY !== null && (
         <div
@@ -93,7 +110,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
             width: Math.abs(endX - startX),
             height: Math.abs(endY - startY),
           }}
-        ></div>
+        />
       )}
     </div>
   );

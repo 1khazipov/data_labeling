@@ -76,6 +76,8 @@ const App: FC = () => {
               imageUrl={imageUrl}
               onRectangleSelect={handleRectangleSelect}
               allRectangleCoordinates={allRectangleCoordinates}
+              onRectangleClick={() => {}}
+              setAllRectangleCoordinates={setAllRectangleCoordinates} // Pass the function here
             />
           )}
           {imageUrl && currentRectangleCoordinates.length > 0 && (
