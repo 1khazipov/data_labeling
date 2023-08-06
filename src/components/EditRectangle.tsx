@@ -42,7 +42,7 @@ const EditRectangle: FC<EditRectangleProps> = ({ coordinates, onCoordinatesChang
         default:
           break;
       }
-      onCoordinatesChange(newCoordinates);
+    onCoordinatesChange(newCoordinates);
     }
   };
 

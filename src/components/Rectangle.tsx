@@ -27,17 +27,17 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
     if (!isResizing || dragHandle === null || rectangleRef.current === null) {
       return;
     }
-  
+
     event.stopPropagation();
     event.preventDefault();
-  
+
     const rect = rectangleRef.current.getBoundingClientRect();
-  
+
     const diffX = event.clientX - rect.left;
     const diffY = event.clientY - rect.top;
-  
+
     const updatedCoordinates = [...coordinates];
-  
+
     switch (dragHandle) {
       case 0:
         updatedCoordinates[0] = x1 + diffX;
@@ -70,7 +70,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
       default:
         break;
     }
-  
+
     onCoordinatesChange(updatedCoordinates);
   };  
 
@@ -105,7 +105,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
       style={{
         position: "absolute",
         border: "2px solid blue",
-        pointerEvents: "auto",
+        pointerEvents: "none",
         left: x1,
         top: y1,
         width: x2 - x1,
@@ -120,6 +120,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
           key={index}
           style={{
             position: "absolute",
+            pointerEvents: "auto",
             width: "8px",
             height: "8px",
             background: "blue",
