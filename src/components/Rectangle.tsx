@@ -3,7 +3,7 @@ import React, { FC, MouseEvent, useRef, useState } from "react";
 interface RectangleProps {
   coordinates: number[];
   onCoordinatesChange: (updatedCoordinates: number[]) => void;
-  onRectangleClick: () => void; // Add onRectangleClick prop
+  onRectangleClick: () => void;
 }
 
 const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRectangleClick }) => {
@@ -11,7 +11,6 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
   const [dragHandle, setDragHandle] = useState<number | null>(null);
 
   const rectangleRef = useRef<HTMLDivElement>(null);
-
   const [x1, y1, x2, y2] = coordinates;
 
   const handleMouseDown = (event: MouseEvent<HTMLDivElement>, handleIndex: number) => {
@@ -85,7 +84,6 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
     [-5, (y2 - y1) / 2 - 5], // left-middle
   ];
   
-  // Updated getResizeCursor function
   const getResizeCursor = (handleIndex: number) => {
     const cursorMap = [
       "nw-resize",
@@ -112,11 +110,10 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
         width: x2 - x1,
         height: y2 - y1,
       }}
-      onClick={onRectangleClick} // Add the event handler to the main div element
+      onClick={onRectangleClick}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      {/* Handle resize handles */}
       {Array.from({ length: 8 }).map((_, index) => (
         <div
           key={index}

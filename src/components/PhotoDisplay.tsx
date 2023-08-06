@@ -1,4 +1,4 @@
-import React, { FC, useRef, useState, MouseEvent, useEffect } from "react";
+import React, { FC, useRef, useState, MouseEvent, useEffect, Dispatch, SetStateAction } from "react";
 import Rectangle from "./Rectangle";
 
 interface PhotoDisplayProps {
@@ -6,7 +6,7 @@ interface PhotoDisplayProps {
   onRectangleSelect: (startX: number, startY: number, endX: number, endY: number) => void;
   allRectangleCoordinates: number[][];
   onRectangleClick: (index: number) => void;
-  setAllRectangleCoordinates: React.Dispatch<React.SetStateAction<number[][]>>;
+  setAllRectangleCoordinates: Dispatch<SetStateAction<number[][]>>;
 }
 
 const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allRectangleCoordinates, onRectangleClick, setAllRectangleCoordinates }) => {
@@ -64,10 +64,6 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
     setAllRectangleCoordinates(updatedAllRectangleCoordinates);
   };
 
-  const handleRectangleClick = (index: number) => {
-    onRectangleClick(index);
-  };
-
   useEffect(() => {
     if (startX !== null && startY !== null && endX !== null && endY !== null && isDrawing) {
       onRectangleSelect(
@@ -96,7 +92,7 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
           key={index}
           coordinates={rectangle}
           onCoordinatesChange={(updatedCoordinates) => handleRectangleUpdate(updatedCoordinates, index)}
-          onRectangleClick={() => onRectangleClick(index)} // Pass onRectangleClick to Rectangle
+          onRectangleClick={() => onRectangleClick(index)}
         />
       ))}
       {startX !== null && startY !== null && endX !== null && endY !== null && (
