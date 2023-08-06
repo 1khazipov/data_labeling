@@ -75,14 +75,14 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
   };
 
   const handlePositions = [
-    [x1, y1], // top-left
-    [x1 + (x2 - x1) / 2, y1], // top-middle
-    [x2, y1], // top-right
-    [x2, y1 + (y2 - y1) / 2], // right-middle
-    [x2, y2], // bottom-right
-    [x1 + (x2 - x1) / 2, y2], // bottom-middle
-    [x1, y2], // bottom-left
-    [x1, y1 + (y2 - y1) / 2], // left-middle
+    [-5, -5], // top-left
+    [(x2 - x1) / 2 - 5, -5], // top-middle
+    [x2 - x1 - 7, -5], // top-right
+    [x2 - x1 - 7, (y2 - y1) / 2 - 5], // right-middle
+    [x2 - x1 - 7, y2 - y1 - 7], // bottom-right
+    [(x2 - x1) / 2 - 5, y2 - y1 - 7], // bottom-middle
+    [-5, y2 - y1 - 7], // bottom-left
+    [-5, (y2 - y1) / 2 - 5], // left-middle
   ];
   
   // Updated getResizeCursor function
