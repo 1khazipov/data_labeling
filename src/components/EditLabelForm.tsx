@@ -17,9 +17,12 @@ const EditLabelForm: FC<EditLabelFormProps> = ({ labelCard, rectangleCoordinates
   };
 
   const handleChangeCoordinates = (index: number, value: string) => {
-    const newCoordinates = [...editedCoordinates];
-    newCoordinates[index] = parseInt(value);
-    setEditedCoordinates(newCoordinates);
+    const parsedValue = parseFloat(value);
+    if (!isNaN(parsedValue)) {
+      const newCoordinates = [...editedCoordinates];
+      newCoordinates[index] = parsedValue;
+      setEditedCoordinates(newCoordinates);
+    }
   };
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -37,7 +40,7 @@ const EditLabelForm: FC<EditLabelFormProps> = ({ labelCard, rectangleCoordinates
     onCancel();
   };
 
-    return (
+  return (
     <form className="edit-label-form" onSubmit={handleSubmit}>
       <div className="form-row">
         <label>Title:</label>

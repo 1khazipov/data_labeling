@@ -42,7 +42,7 @@ const SingleLabelCard: FC<SingleLabelCardProps> = ({
   return (
     <div className="labelCard">
       <h2>{labelCard.title}</h2>
-      <span>({labelCard.coordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})</span>
+      <span>({rectangleCoordinates[0]}, {rectangleCoordinates[1]}) - ({rectangleCoordinates[2]}, {rectangleCoordinates[3]})</span>
       <div className="button-container">
         <button onClick={handleDelete}>Удалить</button>
         <button onClick={handleEdit}>Изменить</button>

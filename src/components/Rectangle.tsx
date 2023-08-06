@@ -27,51 +27,52 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
     if (!isResizing || dragHandle === null || rectangleRef.current === null) {
       return;
     }
-
+  
     event.stopPropagation();
     event.preventDefault();
-
+  
     const rect = rectangleRef.current.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
-
+  
+    const diffX = event.clientX - rect.left;
+    const diffY = event.clientY - rect.top;
+  
     const updatedCoordinates = [...coordinates];
-
+  
     switch (dragHandle) {
       case 0:
-        updatedCoordinates[0] = x;
-        updatedCoordinates[1] = y;
+        updatedCoordinates[0] = x1 + diffX;
+        updatedCoordinates[1] = y1 + diffY;
         break;
       case 1:
-        updatedCoordinates[1] = y;
+        updatedCoordinates[1] = y1 + diffY;
         break;
       case 2:
-        updatedCoordinates[2] = x;
-        updatedCoordinates[1] = y;
+        updatedCoordinates[2] = x1 + diffX;
+        updatedCoordinates[1] = y1 + diffY;
         break;
       case 3:
-        updatedCoordinates[2] = x;
+        updatedCoordinates[2] = x1 + diffX;
         break;
       case 4:
-        updatedCoordinates[2] = x;
-        updatedCoordinates[3] = y;
+        updatedCoordinates[2] = x1 + diffX;
+        updatedCoordinates[3] = y1 + diffY;
         break;
       case 5:
-        updatedCoordinates[3] = y;
+        updatedCoordinates[3] = y1 + diffY;
         break;
       case 6:
-        updatedCoordinates[0] = x;
-        updatedCoordinates[3] = y;
+        updatedCoordinates[0] = x1 + diffX;
+        updatedCoordinates[3] = y1 + diffY;
         break;
       case 7:
-        updatedCoordinates[0] = x;
+        updatedCoordinates[0] = x1 + diffX;
         break;
       default:
         break;
     }
-
+  
     onCoordinatesChange(updatedCoordinates);
-  };
+  };  
 
   const handlePositions = [
     [-5, -5], // top-left
