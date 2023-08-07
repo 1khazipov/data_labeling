@@ -1,12 +1,11 @@
-import React, { FC, MouseEvent, useRef, useState } from "react";
+import React, { FC, MouseEvent, useEffect, useRef, useState, useCallback } from "react";
 
 interface RectangleProps {
   coordinates: number[];
   onCoordinatesChange: (updatedCoordinates: number[]) => void;
-  onRectangleClick: () => void;
 }
 
-const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRectangleClick }) => {
+const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange }) => {
   const [isResizing, setIsResizing] = useState<boolean>(false);
   const [dragHandle, setDragHandle] = useState<number | null>(null);
 
@@ -23,7 +22,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
     setIsResizing(false);
   };
 
-  const handleMouseMove = (event: MouseEvent<HTMLDivElement>) => {
+  const handleMouseMove = useCallback((event: MouseEvent<HTMLDivElement>) => {
     if (!isResizing || dragHandle === null || rectangleRef.current === null) {
       return;
     }
@@ -35,44 +34,67 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
 
     const diffX = event.clientX - rect.left;
     const diffY = event.clientY - rect.top;
+    const minWidth = 0;
+    const minHeight = 0;
+    const maxWidth = 700;
+    const maxHeight = 400;
 
     const updatedCoordinates = [...coordinates];
-
     switch (dragHandle) {
       case 0:
-        updatedCoordinates[0] = x1 + diffX;
-        updatedCoordinates[1] = y1 + diffY;
+        updatedCoordinates[0] = Math.min(Math.max(x1 + diffX, 0), x2 - minWidth);
+        updatedCoordinates[1] = Math.min(Math.max(y1 + diffY, 0), y2 - minHeight);
         break;
       case 1:
-        updatedCoordinates[1] = y1 + diffY;
+        updatedCoordinates[1] = Math.min(Math.max(y1 + diffY, 0), y2 - minHeight);
         break;
       case 2:
-        updatedCoordinates[2] = x1 + diffX;
-        updatedCoordinates[1] = y1 + diffY;
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x1 + minWidth);
+        updatedCoordinates[1] = Math.min(Math.max(y1 + diffY, 0), y2 - minHeight);
         break;
       case 3:
-        updatedCoordinates[2] = x1 + diffX;
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x1 + minWidth);
         break;
       case 4:
-        updatedCoordinates[2] = x1 + diffX;
-        updatedCoordinates[3] = y1 + diffY;
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x2 - minWidth);
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
         break;
       case 5:
-        updatedCoordinates[3] = y1 + diffY;
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
         break;
       case 6:
-        updatedCoordinates[0] = x1 + diffX;
-        updatedCoordinates[3] = y1 + diffY;
+        updatedCoordinates[0] = Math.min(Math.max(x1 + diffX, 0), x2 - minWidth);
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
         break;
       case 7:
-        updatedCoordinates[0] = x1 + diffX;
+        updatedCoordinates[0] = Math.min(Math.max(x1 + diffX, 0), x2 - minWidth);
         break;
       default:
         break;
     }
 
     onCoordinatesChange(updatedCoordinates);
-  };  
+  }, [isResizing, dragHandle, x1, x2, y1, y2, coordinates, onCoordinatesChange]);
+
+  useEffect(() => {
+    const handleMouseMoveOnWindow = (event: any) => {
+      handleMouseMove(event as MouseEvent<HTMLDivElement>);
+    };
+
+    const handleMouseUpOnWindow = () => {
+      setIsResizing(false);
+    };
+
+    if (isResizing) {
+      window.addEventListener("mousemove", handleMouseMoveOnWindow);
+      window.addEventListener("mouseup", handleMouseUpOnWindow);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMoveOnWindow);
+      window.removeEventListener("mouseup", handleMouseUpOnWindow);
+    };
+  }, [isResizing, handleMouseMove]);
 
   const handlePositions = [
     [-5, -5], // top-left
@@ -84,7 +106,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
     [-5, y2 - y1 - 7], // bottom-left
     [-5, (y2 - y1) / 2 - 5], // left-middle
   ];
-  
+
   const getResizeCursor = (handleIndex: number) => {
     const cursorMap = [
       "nw-resize",
@@ -111,7 +133,6 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange, onRec
         width: x2 - x1,
         height: y2 - y1,
       }}
-      onClick={onRectangleClick}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >

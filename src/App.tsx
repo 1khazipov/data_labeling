@@ -62,10 +62,6 @@ const App: FC = () => {
     setEditIndex(null);
   };
 
-  const handleAllRectangleCoordinatesUpdate = (updatedCoordinates: number[][]) => {
-    setAllRectangleCoordinates(updatedCoordinates);
-  };
-
   return (
     <div className="App">
       <div className="columns-container">
@@ -76,7 +72,6 @@ const App: FC = () => {
               imageUrl={imageUrl}
               onRectangleSelect={handleRectangleSelect}
               allRectangleCoordinates={allRectangleCoordinates}
-              onRectangleClick={() => {}}
               setAllRectangleCoordinates={setAllRectangleCoordinates}
             />
           )}

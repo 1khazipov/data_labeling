@@ -5,11 +5,10 @@ interface PhotoDisplayProps {
   imageUrl: string;
   onRectangleSelect: (startX: number, startY: number, endX: number, endY: number) => void;
   allRectangleCoordinates: number[][];
-  onRectangleClick: (index: number) => void;
   setAllRectangleCoordinates: Dispatch<SetStateAction<number[][]>>;
 }
 
-const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allRectangleCoordinates, onRectangleClick, setAllRectangleCoordinates }) => {
+const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allRectangleCoordinates, setAllRectangleCoordinates }) => {
   const [startX, setStartX] = useState<number | null>(null);
   const [startY, setStartY] = useState<number | null>(null);
   const [endX, setEndX] = useState<number | null>(null);
@@ -76,12 +75,12 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
   }, [startX, startY, endX, endY, isDrawing, onRectangleSelect]);
 
   return (
-    <div style={{ position: "relative", maxWidth: "1000px", marginTop: "40px" }}>
+    <div style={{ position: "relative", width: "700px",height:'400px', marginTop: "40px" }}>
       <img
         ref={imageRef}
         src={imageUrl}
         alt="Uploaded"
-        style={{ width: "100%" }}
+        style={{ width: "100%", height:"100%"}}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
@@ -92,7 +91,6 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
           key={index}
           coordinates={rectangle}
           onCoordinatesChange={(updatedCoordinates) => handleRectangleUpdate(updatedCoordinates, index)}
-          onRectangleClick={() => onRectangleClick(index)}
         />
       ))}
       {startX !== null && startY !== null && endX !== null && endY !== null && (

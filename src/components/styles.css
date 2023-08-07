@@ -9,161 +9,168 @@
     max-width: 1200px;
     margin: 0 auto;
     padding-top: 20px;
-  }
+}
   
-  .left-column {
-    width: 60%; 
-    padding-right: 10px;
-  }
-  
-  .right-column {
-    width: 30%;
-    padding-left: 10px;
-  }
-  
-  form {
-    margin-bottom: 52px;
-    border: 2px solid #000;
-    overflow: hidden;
-    display: -webkit-box;
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 520px;
-  }
-  
-  form input {
-    width: 50%;
-    padding: 10px;
-    line-height: 1;
-    font-size: 16px;
-    border: 1px solid #000;
-    background: #fff;
-  }
-  
-  form input:focus {
-    outline: 0;
-    background: #fef2de;
-  }
-  
-  form input:last-of-type {
-    width: 100%;;
-  }
+.left-column {
+  width: 60%; 
+  padding-right: 10px;
+}
 
-  form button {
-    width: 100%;
-    border: 1px solid #000;
-    font-size: 16px;
-  }
-  
-  button,
-  input[type=submit] {
-    text-transform: uppercase;
-    padding: 8px 15px;
-    background: #f00;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-  }
+.right-column {
+  width: 30%;
+  padding-left: 10px;
+}
 
-  /* button,
-  input[type=reset] {
-    text-transform: uppercase;
-    padding: 8px 15px;
-    border: 0;
-    background: #f00;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-  } */
+form {
+  margin-top: 20px;
+  margin-bottom: 52px;
+  border: 2px solid #000;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: "center";
+  align-items: "center";
+  max-width: 520px;
+}
 
-  .labelCard {
-    background: white;
-    border: 1px solid #ededed;
-    box-shadow: 0 12px 24px 0 rgba(0,0,0,0.09);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    padding: 12px;
-    margin-bottom: 22px;
-    border: 0;
-    border-bottom: 1px solid #000;
-    border-right: 1px solid #000;
-    border-top: 1px solid #000;
-    border-left: 1px solid #000;
-    border-radius: 0;
-  }
+form input {
+  width: 50%;
+  padding: 10px;
+  line-height: 1;
+  font-size: 16px;
+  border: 1px solid #000;
+  background: #fff;
+}
 
-  .labelCard h2 {
-    margin: 0 30px;
-    text-align: center;
-    background: white;
-    display: inline;
-    line-height: 1.5;
-    font-size: 16px;
-    color: black;
-  }
+form input:focus {
+  outline: 0;
+  background: #fef2de;
+}
 
-  .labelCard button {
-    margin-top: 8px;
-    width: 50%;
-    padding: 8px 12px;
-    border: 1px solid black;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .labelCard button:last-child {
-    margin-right: 0;
-  }
-  
-  .labelCard button:hover {
-    background-color: #0056b3;
-  }
+form input:last-of-type {
+  width: 100%;;
+}
 
-  .edit-label-form {
-    border: 1px solid #ccc;
-    padding: 20px;
-    max-width: 400px;
-    margin: 0 auto;
-    margin-top: 12px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  }
-  
-  .edit-label-form label {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 8px;
-  }
-  
-  .edit-label-form input {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .edit-label-form input:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-  
-  .edit-label-form button {
-    width: 50%;
-    padding: 8px 12px;
-    border: 1px solid black;
-    border-radius: 4px;
-    background-color: #007bff;
-    color: #fff;
-    font-size: 14px;
-    cursor: pointer;
-  }
-  
-  .edit-label-form button:hover {
-    background-color: #0056b3;
-  }
-  
+form button {
+  width: 100%;
+  border: 1px solid #000;
+  font-size: 16px;
+}
+
+button,
+input[type=submit] {
+  text-transform: uppercase;
+  padding: 8px 15px;
+  background: #f00;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #a71a21;
+}
+
+/* button,
+input[type=reset] {
+  text-transform: uppercase;
+  padding: 8px 15px;
+  border: 0;
+  background: #f00;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+} */
+
+.labelCard {
+  background: white;
+  border: 1px solid #ededed;
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.09);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  margin-bottom: 22px;
+  border: 0;
+  border-bottom: 1px solid #000;
+  border-right: 1px solid #000;
+  border-top: 1px solid #000;
+  border-left: 1px solid #000;
+  border-radius: 0;
+}
+
+.labelCard h2 {
+  margin: 0 30px;
+  text-align: center;
+  background: white;
+  display: inline;
+  line-height: 1.5;
+  font-size: 16px;
+  color: black;
+}
+
+.labelCard button {
+  margin-top: 8px;
+  margin-right: 4px;
+  width: 45%;
+  padding: 8px 12px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.labelCard button:last-child {
+  margin-right: 0;
+}
+
+.labelCard button:hover {
+  background-color: #0056b3;
+}
+
+.edit-label-form {
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  margin-top: 12px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+.edit-label-form label {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.edit-label-form input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.edit-label-form input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+.edit-label-form button {
+  margin-right: 4px;
+  width: 45%;
+  padding: 8px 12px;
+  border: 1px solid black;
+  border-radius: 4px;
+  background-color: #007bff;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.edit-label-form button:hover {
+  background-color: #0056b3;
+}
