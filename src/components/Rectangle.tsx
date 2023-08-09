@@ -2,10 +2,12 @@ import React, { FC, MouseEvent, useEffect, useRef, useState, useCallback } from 
 
 interface RectangleProps {
   coordinates: number[];
+  photoWidth: number;
+  photoHeight: number;
   onCoordinatesChange: (updatedCoordinates: number[]) => void;
 }
 
-const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange }) => {
+const Rectangle: FC<RectangleProps> = ({ coordinates, photoWidth, photoHeight, onCoordinatesChange }) => {
   const [isResizing, setIsResizing] = useState<boolean>(false);
   const [dragHandle, setDragHandle] = useState<number | null>(null);
 
@@ -36,8 +38,6 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange }) => 
     const diffY = event.clientY - rect.top;
     const minWidth = 0;
     const minHeight = 0;
-    const maxWidth = 700;
-    const maxHeight = 400;
 
     const updatedCoordinates = [...coordinates];
     switch (dragHandle) {
@@ -49,22 +49,22 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange }) => 
         updatedCoordinates[1] = Math.min(Math.max(y1 + diffY, 0), y2 - minHeight);
         break;
       case 2:
-        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x1 + minWidth);
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x1 + minWidth);
         updatedCoordinates[1] = Math.min(Math.max(y1 + diffY, 0), y2 - minHeight);
         break;
       case 3:
-        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x1 + minWidth);
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x1 + minWidth);
         break;
       case 4:
-        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, maxWidth), x2 - minWidth);
-        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x2 - minWidth);
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, photoHeight), y1 + minHeight);
         break;
       case 5:
-        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, photoHeight), y1 + minHeight);
         break;
       case 6:
         updatedCoordinates[0] = Math.min(Math.max(x1 + diffX, 0), x2 - minWidth);
-        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, maxHeight), y1 + minHeight);
+        updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, photoHeight), y1 + minHeight);
         break;
       case 7:
         updatedCoordinates[0] = Math.min(Math.max(x1 + diffX, 0), x2 - minWidth);
@@ -74,7 +74,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, onCoordinatesChange }) => 
     }
 
     onCoordinatesChange(updatedCoordinates);
-  }, [isResizing, dragHandle, x1, x2, y1, y2, coordinates, onCoordinatesChange]);
+  }, [isResizing, dragHandle, x1, x2, y1, y2, coordinates, onCoordinatesChange, photoWidth, photoHeight]);
 
   useEffect(() => {
     const handleMouseMoveOnWindow = (event: any) => {

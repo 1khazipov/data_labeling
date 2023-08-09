@@ -75,12 +75,12 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
   }, [startX, startY, endX, endY, isDrawing, onRectangleSelect]);
 
   return (
-    <div style={{ position: "relative", width: "700px",height:'400px', marginTop: "40px" }}>
+    <div style={{ position: "relative", marginTop: "20px" }}>
       <img
         ref={imageRef}
         src={imageUrl}
         alt="Uploaded"
-        style={{ width: "100%", height:"100%"}}
+        style={{width: "100%", height:"100%"}}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
@@ -90,6 +90,8 @@ const PhotoDisplay: FC<PhotoDisplayProps> = ({ imageUrl, onRectangleSelect, allR
         <Rectangle
           key={index}
           coordinates={rectangle}
+          photoWidth={imageRef.current?.width || 0}
+          photoHeight={imageRef.current?.height || 0}
           onCoordinatesChange={(updatedCoordinates) => handleRectangleUpdate(updatedCoordinates, index)}
         />
       ))}
