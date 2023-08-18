@@ -56,7 +56,7 @@ const Rectangle: FC<RectangleProps> = ({ coordinates, photoWidth, photoHeight, o
         updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x1 + minWidth);
         break;
       case 4:
-        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x2 - minWidth);
+        updatedCoordinates[2] = Math.max(Math.min(x1 + diffX, photoWidth), x1 + minWidth);
         updatedCoordinates[3] = Math.max(Math.min(y1 + diffY, photoHeight), y1 + minHeight);
         break;
       case 5:
