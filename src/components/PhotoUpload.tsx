@@ -1,4 +1,5 @@
 import React, { FC, useRef } from "react";
+import "./styles.css"
 
 interface PhotoUploadProps {
     onImageUpload: (image: string) => void;
@@ -20,8 +21,8 @@ const PhotoUpload: FC<PhotoUploadProps> = ({ onImageUpload }) => {
     };
 
     return (
-        <div>
-            <h1>Загрузите фото</h1>
+        <div className="photo-upload-container">
+            <h1 className="upload-header">Загрузите фото</h1>
             <input type="file" ref={fileInputRef} onChange={handleImageUpload} />
         </div>
     );

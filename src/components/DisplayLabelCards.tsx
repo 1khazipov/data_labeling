@@ -23,23 +23,25 @@ const DisplayLabelCards: FC<DisplayLabelCardsProps> = ({
 }) => {
   return (
     <div className="container">
-      {allRectangleCoordinates.map((coordinates, index) => {
-        const labelCard = labelCardsList[index] || { id: index, title: "Untitled" };
-        const isEditing = index === editIndex;
-        return (
-          <SingleLabelCard
-            key={labelCard.id}
-            deleteLabelCard={deleteLabelCard}
-            labelCard={labelCard}
-            rectangleCoordinates={coordinates}
-            index={index}
-            isEditing={isEditing}
-            onRectangleEdit={onRectangleEdit}
-            onSaveLabel={onSaveLabel}
-            onCancelEdit={onCancelEdit}
-          />
-        );
-      })}
+      <div className="label-cards-container">
+        {allRectangleCoordinates.map((coordinates, index) => {
+          const labelCard = labelCardsList[index] || { id: index, title: "Untitled" };
+          const isEditing = index === editIndex;
+          return (
+            <SingleLabelCard
+              key={labelCard.id}
+              deleteLabelCard={deleteLabelCard}
+              labelCard={labelCard}
+              rectangleCoordinates={coordinates}
+              index={index}
+              isEditing={isEditing}
+              onRectangleEdit={onRectangleEdit}
+              onSaveLabel={onSaveLabel}
+              onCancelEdit={onCancelEdit}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
